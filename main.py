@@ -173,6 +173,12 @@ def main():
     matched = [j for j in jobs if matches_keywords(j)]
     new_jobs = [j for j in matched if str(j["id"]) not in seen_ids]
 
+    # Always update and save state, even if there's nothing new to email —
+    # this guarantees seen_jobs.json exists after every run, so the
+    # workflow's commit step never fails looking for a missing file.
+    seen_ids.update(str(j["id"]) for j in matched)
+    save_seen_ids(seen_ids)
+
     if not new_jobs:
         print("No new matching jobs today — skipping email.")
         return
@@ -184,9 +190,6 @@ def main():
     except Exception as e:
         print(f"Failed to send email: {e}", file=sys.stderr)
         sys.exit(1)
-
-    seen_ids.update(str(j["id"]) for j in new_jobs)
-    save_seen_ids(seen_ids)
 
     print(f"Email sent successfully with {len(new_jobs)} new job(s).")
 
