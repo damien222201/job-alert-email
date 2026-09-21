@@ -1,4 +1,5 @@
 # Remote Job Alert Email
+<img width="1920" height="1080" alt="Screenshot from 2026-09-21 19-07-09" src="https://github.com/user-attachments/assets/f9389ac5-ef7a-40b2-8cb1-0487ac505a6a" />
 
 Sends a daily email at 6:00 AM (WAT) with new remote job postings
 matching: **AI Engineer, Software Engineer, Full-Stack Developer,
